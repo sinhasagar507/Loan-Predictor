@@ -1,2 +1,2 @@
 # Loan-Predictor
-ML model still under development 
+ML model under development 
