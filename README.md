@@ -1,2 +1,2 @@
 # Loan-Predictor
-ML model under development 
+Loan Predictor using Boosting Algorithms. Deployment using Heroku 
