@@ -9,17 +9,13 @@ import numpy as np
 
 
 #Initialising the app and loading the models
-app = Flask(__name__)
-
+app = Flask(__name__) 
 xgbr_model = joblib.load("./saved models/xgbr.pkl")
 lgbm_model = joblib.load("./saved models/lgbm.pkl")
 rmr_model = joblib.load("./saved models/rmr.pkl")
 print("Models Loaded")
     
 #Use flask_cors or secret key
-
-
-
 @app.route("/", methods=['GET']) #This signifies the default route
 @cross_origin()
 def home():
@@ -29,141 +25,51 @@ def home():
 @cross_origin()
 def predict():
     if request.method == "POST":
-        
-         # Monthly EMI
-         emi = float(request.form['EMI'])
-         
-         # Income
-         income = float(request.form['Income'])
-        
-		 # Loan to Value Ratio
-         ltv = float(request.form['LTV'])
-         
-		 # Asset Cost
-         assetCost = float(request.form['Asset-Cost'])
-         
-		 # Age
-         age = float(request.form['Age'])
-         
-		 # Mean Balance
-         meanBal = float(request.form['Balance-Mean'])
-        
-		 # Maximum Current Balance
-         currBal = float(request.form['Current-Bal'])
-        
-		 # Disbursed Amount
-         disbursedAmt = float(request.form['Disbursed-Amt'])
-        
-		 # Finance-Amount
-         amtFin = float(request.form['Amt-Fin'])
-         
-		 # Minimum Current Balance Sum
-         minCBS = float(request.form['Min-CBS'])
-         
-		 # Delays in request
-         delays = float(request.form['Delays'])
-        
-		 # Count of Payments Past Due Dates
-         paymentPD = float(request.form['Payment-PP'])
-        
-		 # Mean of Successive Current Balance Differences
-         meanSCB = float(request.form['Mean-SCB'])
-
-		 # Sum of number of delays in payment
-         sumDelays = float(request.form['Delays-Sum'])
-         
-		 # Minimum Current Balance
-         minCB = float(request.form['Min-CB'])
-        
-		 # Mean of month count with no history of prior payment
-         meanMC = float(request.form['MC'])
-        
-		 # Maximum Current Balance
-         maxCB = float(request.form['Max-CB'])
-        
-		 # Mean of Maximum Current Balances for no recorded Payment History
-         hout = float(request.form['HOUT'])
-        
-		 # Maximum of Minimum of Current Balances
-         mamiCB = float(request.form['MaMiCB'])
-        
-		 # Current Balance
-         cb = float(request.form['CB'])
-        
-		 # Tenure
-         tenure = float(request.form['Tenure'])
-        
-		 # Mean of Sum of Successive Current Balance Differences
-         meanBD = float(request.form['Mean-BD'])
-        
-         # Sum of month count with no history of prior payment
-         mchprp = float(request.form['MCHPRP'])
-        
-		 # Maximum Count of Payment Past Due Date
-         mcppdd = float(request.form['MCPPDD'])
-        
-		 # Maximum Count of Number of delays in Payment
-         mcnpaym = float(request.form['MCNPAYM'])
-        
-		 # 0 or 1 as per the history of outstanding payments
-         hhopaym = float(request.form['HHOPAYM'])
-        
-		 # Mean of Maximum Amount Paid
-         mmaapa= float(request.form['MMaAPa'])
-        
-		 # Mean of Sum of Amount Paid
-         mosoap = float(request.form['MOSOAP'])
-        
-		 # Maximum of Maximum Amount Paid
-         mamaap= float(request.form['MaMaAP'])
-        
-		 # 0 or 1 as per the history of outstanding payments
-         hhopay = float(request.form['HHOPAY'])
-         
-         # Maximum of Sum of Amount Paid
-         masap = float(request.form['MASAP'])
-         
-         # Minimum Count of No. of Delays in Payment
-         mcndp = float(request.form['MCNDP'])
-         
-         # Maximum of Average Successive Difference in Current Balance
-         masdcb = float(request.form['MASDCB'])
-         
-         # Minimum Current Balance
-         minicb = float(request.form['MiniCB'])
-         
-         # Minimum Current Balance
-         mssdcb = float(request.form['MSSDCB'])
-         
-         # 0 or 1 as per the history of outstanding payments
-         hhopa = float(request.form['HHOPA'])
-         
-         # Minimum Count of Payments Past Due Date
-         mmcpppd = float(request.form['MMCPPPD'])
-         
-         # Mean of Minimum Current Balance
-         memcb = float(request.form['MeMCB'])
-         
-         # Minimum of Minimum Current Balance
-         mmcb = float(request.form['MMCB'])
-         
-         # 0 or 1 as per the history of outstanding payments
-         o1h0 = float(request.form['01HO'])
-         
-         # Sum of Minimum Current Difference in Balance
-         smcb = float(request.form['SMCB'])
-         
-         # Minimum of Minimum Amount Paid
-         mimap = float(request.form['MiMAP'])
-         
-         # Sum of Minimum Amount Paid
-         smap = float(request.form['SMAP'])
-         
-         # Maximum of Minimum Amount Paid
-         mmap = float(request.form['MMAP'])
-         
-         #Take care of the missing value
-         miss = float(0)
+         emi = float(request.form['EMI'])     # Monthly EMI
+         income = float(request.form['Income'])   # Income
+         ltv = float(request.form['LTV']) # Loan to Value Ratio
+         assetCost = float(request.form['Asset-Cost'])  # Asset Cost
+         age = float(request.form['Age'])  # Age
+         meanBal = float(request.form['Balance-Mean'])   # Mean Balance
+         currBal = float(request.form['Current-Bal'])  # Maximum Current Balance 
+         disbursedAmt = float(request.form['Disbursed-Amt'])   # Disbursed Amount
+         amtFin = float(request.form['Amt-Fin'])  # Finance-Amount
+         minCBS = float(request.form['Min-CBS']) # Minimum Current Balance Sum
+         delays = float(request.form['Delays'])   # Delays in request 
+         paymentPD = float(request.form['Payment-PP'])  # Count of Payments Past Due Dates
+         meanSCB = float(request.form['Mean-SCB'])   # Mean of Successive Current Balance Differences
+         sumDelays = float(request.form['Delays-Sum'])  # Sum of number of delays in payment
+         minCB = float(request.form['Min-CB'])   # Minimum Current Balance
+         meanMC = float(request.form['MC'])   # Mean of month count with no history of prior payment
+         maxCB = float(request.form['Max-CB'])   # Maximum Current Balance
+         hout = float(request.form['HOUT'])  # Mean of Maximum Current Balances for no recorded Payment History
+         mamiCB = float(request.form['MaMiCB']) # Maximum of Minimum of Current Balances
+         cb = float(request.form['CB'])   # Current Balance
+         tenure = float(request.form['Tenure'])  # Tenure
+         meanBD = float(request.form['Mean-BD']) # Mean of Sum of Successive Current Balance Differences
+         mchprp = float(request.form['MCHPRP'])  # Sum of month count with no history of prior payment
+         mcppdd = float(request.form['MCPPDD'])  # Maximum Count of Payment Past Due Date
+         mcnpaym = float(request.form['MCNPAYM'])  # Maximum Count of Number of delays in Payment
+         hhopaym = float(request.form['HHOPAYM'])  # 0 or 1 as per the history of outstanding payment
+         mmaapa= float(request.form['MMaAPa']) # Mean of Maximum Amount Paid
+         mosoap = float(request.form['MOSOAP'])  # Mean of Sum of Amount Paid 
+         mamaap= float(request.form['MaMaAP'])  # Maximum of Maximum Amount Paid
+         hhopay = float(request.form['HHOPAY'])  # 0 or 1 as per the history of outstanding payments
+         masap = float(request.form['MASAP']) # Maximum of Sum of Amount Paid
+         mcndp = float(request.form['MCNDP'])  # Minimum Count of No. of Delays in Payment
+         masdcb = float(request.form['MASDCB'])  # Maximum of Average Successive Difference in Current Balance
+         minicb = float(request.form['MiniCB']) # Minimum Current Balance 
+         mssdcb = float(request.form['MSSDCB']) # Minimum Current Balance
+         hhopa = float(request.form['HHOPA'])   # 0 or 1 as per the history of outstanding payment
+         mmcpppd = float(request.form['MMCPPPD']) # Minimum Count of Payments Past Due Date 
+         memcb = float(request.form['MeMCB'])     # Mean of Minimum Current Balance
+         mmcb = float(request.form['MMCB'])  # Minimum of Minimum Current Balance
+         o1h0 = float(request.form['01HO'])  # 0 or 1 as per the history of outstanding payments
+         smcb = float(request.form['SMCB'])   # Sum of Minimum Current Difference in Balance 
+         mimap = float(request.form['MiMAP']) # Minimum of all Amounts Paid 
+         smap = float(request.form['SMAP'])          # Sum of Minimum Amount Paid 
+         mmap = float(request.form['MMAP']) # Maximum of Minimum Amount Paid   
+         miss = float(0) #Take care of the missing value
 
          input_lst = [emi, income, ltv, assetCost, age, meanBal, currBal, disbursedAmt, 
                      amtFin, minCBS, delays, paymentPD, meanSCB, sumDelays, minCB, meanMC, maxCB, 
@@ -200,6 +106,6 @@ def predict():
     
     return render_template("predictor.html", title="Prediction Page")
 
-#Run the app from main method
+# Run the app from main method
 if __name__ == '__main__':
    app.run(debug=True)
